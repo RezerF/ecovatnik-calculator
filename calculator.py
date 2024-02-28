@@ -1,10 +1,15 @@
-from common.constants import Common, Plotnost, WorksPrices, MaterialsToSqrMetr
+from typing import Union, List
+
+from common.constants import Common, Plotnost, WorksPrices, MaterialsCodes
+from common.my_types import MaterialsType, WorksType
+from common.table_row import TableRow
 
 
-class Calculator:
-    def __init__(self, sqr, width):
+class InsulationCalculator:
+    def __init__(self, sqr, width, materials: List[Union[MaterialsType, WorksType]]):
         self.sqr = sqr  # метры
         self.width = width  # миллиметры
+        self.materials = materials
 
     @property
     def volume_calculate(self) -> float:
@@ -24,57 +29,84 @@ class Calculator:
     def cost_work_calculate(self, cost_work_per_kg) -> float:
         return round(self.ves_calculate * cost_work_per_kg, 1)
 
-    def izospan_am_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.IZOSPAN_AM, 1)
+    # def izospan_am_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.IZOSPAN_AM, 1)
+    #
+    # def setka_arm_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SETKA_ARM_25x25, 1)
+    #
+    # def brus_50_50_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.BRUS_SS_50x50x3000, 1)
+    #
+    # def brus_20_40_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.BRUS_SS_20x40x3000, 1)
+    #
+    # def samorez_potainoi_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_POTAINOI_40x4, 1)
+    #
+    # def samorez_clop_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_CLOP, 1)
+    #
+    # def bolt_san_tech_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.BOLT_SAN_TECH_8x100, 1)
+    #
+    # def kronshtein_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.KRONSHTEIN, 1)
+    #
+    # def skobi_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SKOBI_53_8, 1)
+    #
+    # def skotch_isospan_kl_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSPAN_KL, 1)
+    #
+    # def skotch_isostrong_lk_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSTRONG_LK, 1)
+    #
+    # def dubel_calculate(self) -> float:
+    #     return round(self.sqr * MaterialsToSqrMetr.DUBEL_10x80, 1)
+    #
+    # def get_materials_data(self):
+    #     return {
+    #         'izospan_am': self.izospan_am_calculate(),
+    #         'setka_arm': self.setka_arm_calculate(),
+    #         'brus_50x50': self.brus_50_50_calculate(),
+    #         'brus_20x40': self.brus_20_40_calculate(),
+    #         'samorez_potainoi': self.samorez_potainoi_calculate(),
+    #         'samorez_clop': self.samorez_clop_calculate(),
+    #         'bolt_san_tech': self.bolt_san_tech_calculate(),
+    #         'kronshtein': self.bolt_san_tech_calculate(),
+    #         'skobi': self.skobi_calculate(),
+    #         'skotch_isospan_kl': self.skotch_isospan_kl_calculate(),
+    #         'skotch_isospan_lk': self.skotch_isostrong_lk_calculate(),
+    #         'dubel': self.dubel_calculate(),
+    #     }
 
-    def setka_arm_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SETKA_ARM_25x25, 1)
+    def get_count(self, material):
+        if material.code == MaterialsCodes.ECOVATA:
+            return self.ves_calculate
+        return round(self.sqr * material.rashod_na_metr, 1)
 
-    def brus_50_50_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.BRUS_SS_50x50x3000, 1)
+    def get_amount_price(self, material):
+        return round(self.get_count(material) * material.price, 1)
 
-    def brus_20_40_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.BRUS_SS_20x40x3000, 1)
+    def get_data_rows(self) -> List[TableRow]:
+        rows = []
+        for material in self.materials:
+            rows.append(TableRow(
+                material.naming,
+                self.get_count(material),
+                material.unit_measure,
+                material.price,
+                self.get_amount_price(material)).get_row()
+            )
+        return rows
 
-    def samorez_potainoi_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_POTAINOI_40x4, 1)
-
-    def samorez_clop_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_CLOP, 1)
-
-    def bolt_san_tech_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.BOLT_SAN_TECH_8x100, 1)
-
-    def kronshtein_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.KRONSHTEIN, 1)
-
-    def skobi_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SKOBI_53_8, 1)
-
-    def skotch_isospan_kl_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSPAN_KL, 1)
-
-    def skotch_isospan_lk_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSPAN_LK, 1)
-
-    def dubel_calculate(self) -> float:
-        return round(self.sqr * MaterialsToSqrMetr.DUBEL_10x80, 1)
-
-    def get_materials_data(self):
-        return {
-            'izospan_am': self.izospan_am_calculate(),
-            'setka_arm': self.setka_arm_calculate(),
-            'brus_50x50': self.brus_50_50_calculate(),
-            'brus_20x40': self.brus_20_40_calculate(),
-            'samorez_potainoi': self.samorez_potainoi_calculate(),
-            'samorez_clop': self.samorez_clop_calculate(),
-            'bolt_san_tech': self.bolt_san_tech_calculate(),
-            'kronshtein': self.bolt_san_tech_calculate(),
-            'skobi': self.skobi_calculate(),
-            'skotch_isospan_kl': self.skotch_isospan_kl_calculate(),
-            'skotch_isospan_lk': self.skotch_isospan_lk_calculate(),
-            'dubel': self.dubel_calculate(),
-        }
+    # def get_data_new(self):
+    #     rows = []
+    #     for material in self.materials:
+    #         x = round(MaterialsType(MaterialsCodes.IZOSPAN_AM).rashod_na_metr * self.sqr, 1)
+    #         rows.append(x)
+    #     return rows
 
     def obreshetki_montaj_po_derevu_calculate(self) -> float:
         return round(self.sqr * WorksPrices.OBRESHETKI_MONTAJ_PO_DEREVU, 1)

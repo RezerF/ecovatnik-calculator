@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insulation_calc"
+description = "Package for claulate costs and materials for insulation ecovata"
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+
+[tool.setuptools_scm]
+
+[tool.black]
+line-length = 99

@@ -1,19 +1,34 @@
-from attrs import asdict, define, field
+from attrs import define, field
+
+from common.constants import NamingMapping, UnitMeasureMapping, MaterialsToSqrMetr, MaterialsPrices
 
 
 @define
-class Materials:
-    name: str = field()
-    unit_measure: str = field()
-    price: float = field()
+class BaseType:
+    code = field()
 
+    @property
+    def naming(self) -> str:
+        return getattr(NamingMapping, self.code)
 
-print(Materials("vata", "kg", 1231))
-print(asdict(Materials("vata", "kg", 1231)))
+    @property
+    def unit_measure(self) -> str:
+        return getattr(UnitMeasureMapping, self.code)
+
+    @property
+    def price(self):
+        return getattr(MaterialsPrices, self.code)
+
+    @property
+    def rashod_na_metr(self):
+        return getattr(MaterialsToSqrMetr, self.code)
 
 
 @define
-class Works:
-    name: str = field()
-    unit_measure: str = field()
-    price: float = field()
+class MaterialsType(BaseType):
+    pass
+
+
+@define
+class WorksType(BaseType):
+    pass
