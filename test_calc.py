@@ -1,6 +1,6 @@
 from insulation_calc.calculator import InsulationCalculator
-from common.constants import MaterialsCodes
-from common.my_types import MaterialsType
+from insulation_calc.common import MaterialsCodes
+from insulation_calc.common import MaterialsType
 import unittest
 
 

@@ -1,6 +1,6 @@
 from attrs import define, field
 
-from common.constants import NamingMapping, UnitMeasureMapping, MaterialsToSqrMetr, MaterialsPrices
+from insulation_calc.common.constants import NamingMapping, UnitMeasureMapping, MaterialsToSqrMetr, MaterialsPrices
 
 
 @define
