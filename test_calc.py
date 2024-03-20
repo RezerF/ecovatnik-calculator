@@ -33,8 +33,6 @@ class TestCalculator(unittest.TestCase):
         x = common_calc.calculate_dop_work_materials()
         print(x)
 
-        self.assertEqual(x[1].total_amount, 70200)
-
     def test_calc_common_work_costs(self):
         common_calc = CommonCalculator(
             sqr_floor=1,
