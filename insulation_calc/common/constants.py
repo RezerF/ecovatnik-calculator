@@ -51,6 +51,7 @@ class MaterialsToSqrMetr:
 
 
 class NamingMapping:
+    # МАТЕРИАЛЫ
     ECOVATA = 'Утеплитель целлюлозный "Эковата"'
     IZOSPAN_AM = 'Ветро-влагозащитная мембрана Изоспан АМ 70'
     SETKA_ARM_25x25 = 'СЕТКА АРМИРУЮЩАЯ 2Х25'
@@ -65,6 +66,14 @@ class NamingMapping:
     SKOTCH_IZOSTRONG_LK = 'Лента соединительная Изостронг LK 15 мм'
     DUBEL_10x80 = 'Дюбель распорный Hard-Fix 10x80 мм нейлон'
 
+    # РАБОТЫ
+    OBRESHETKI_MONTAJ_PO_KIRPICHU = 'Монтаж деревянной обрешетки по кирпичу или бетону'
+    OBRESHETKI_MONTAJ_PO_DEREVU = 'Монтаж деревянной обрешетки по дереву'
+    GIDRO_PAROISOL_MONTAJ = 'Монтаж гидро / пароизоляционной пленки'
+    SETKA_ARMIRUU_MONTAJ = 'Монтаж армирующей сетки'
+    KONTR_OBRESHETKA_MONTAJ = 'Монтаж контробрешетки'
+    ECOVATA_MONTAJ = 'Можтаж утеплителя целлюлозного '
+
 
 class UnitMeasurement:
     M2 = "м2"
@@ -77,6 +86,7 @@ class UnitMeasurement:
 
 
 class UnitMeasureMapping:
+    # МАТЕРИАЛЫ
     ECOVATA = UnitMeasurement.KG
     IZOSPAN_AM = UnitMeasurement.M2
     SETKA_ARM_25x25 = UnitMeasurement.M2
@@ -90,6 +100,14 @@ class UnitMeasureMapping:
     SKOTCH_IZOSPAN_KL = UnitMeasurement.PM
     SKOTCH_IZOSTRONG_LK = UnitMeasurement.PM
     DUBEL_10x80 = UnitMeasurement.PIECES
+
+    # РАБОТЫ
+    OBRESHETKI_MONTAJ_PO_KIRPICHU = UnitMeasurement.M2
+    OBRESHETKI_MONTAJ_PO_DEREVU = UnitMeasurement.M2
+    GIDRO_PAROISOL_MONTAJ = UnitMeasurement.M2
+    SETKA_ARMIRUU_MONTAJ = UnitMeasurement.M2
+    KONTR_OBRESHETKA_MONTAJ = UnitMeasurement.M2
+    ECOVATA_MONTAJ = UnitMeasurement.KG
 
 
 class MaterialsCodes:
@@ -106,3 +124,12 @@ class MaterialsCodes:
     SKOTCH_IZOSPAN_KL = 'SKOTCH_IZOSPAN_KL'
     SKOTCH_IZOSTRONG_LK = 'SKOTCH_IZOSTRONG_LK'
     DUBEL_10x80 = 'DUBEL_10x80'
+
+
+class WorkCodes:
+    ECOVATA_MONTAJ = "ECOVATA_MONTAJ"
+    OBRESHETKI_MONTAJ_PO_KIRPICHU = "OBRESHETKI_MONTAJ_PO_KIRPICHU"
+    OBRESHETKI_MONTAJ_PO_DEREVU = 'OBRESHETKI_MONTAJ_PO_DEREVU'
+    GIDRO_PAROISOL_MONTAJ = 'GIDRO_PAROISOL_MONTAJ'
+    SETKA_ARMIRUU_MONTAJ = 'SETKA_ARMIRUU_MONTAJ'
+    KONTR_OBRESHETKA_MONTAJ = 'KONTR_OBRESHETKA_MONTAJ'
