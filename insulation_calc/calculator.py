@@ -40,107 +40,13 @@ class MaterialsDopWorkCalculator:
         self.is_wall = is_wall
         self.is_roof = is_roof
 
-    # def __init__(
-    #         self,
-    #         sqr_floor,
-    #         width_floor,
-    #         sqr_wall,
-    #         width_wall,
-    #         sqr_roof,
-    #         width_roof,
-    #         is_wood_house,
-    #         is_floor_dop_work,
-    #         is_wall_dop_work,
-    #         is_roof_dop_work,
-    # ):
-    #     self.sqr_floor = sqr_floor
-    #     self.width_floor = width_floor
-    #     self.sqr_wall = sqr_wall
-    #     self.width_wall = width_wall
-    #     self.sqr_roof = sqr_roof
-    #     self.width_roof = width_roof
-    #     self.is_wood_house = is_wood_house  # дом деревянный?
-    #     self.is_floor_dop_work = is_floor_dop_work
-    #     self.is_wall_dop_work = is_wall_dop_work
-    #     self.is_roof_dop_work = is_roof_dop_work
-    #
-    # def izospan_am_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.IZOSPAN_AM, 1)
-    #
-    # def setka_arm_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SETKA_ARM_25x25, 1)
-    #
-    # def brus_50_50_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.BRUS_SS_50x50x3000, 1)
-    #
-    # def reika_20_40_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.REIKA_SS_20x40x3000, 1)
-    #
-    # def samorez_potainoi_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_POTAINOI_40x4, 1)
-    #
-    # def samorez_clop_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SAMOREZ_CLOP, 1)
-    #
-    # def bolt_san_tech_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.BOLT_SAN_TECH_8x100, 1)
-    #
-    # def kronshtein_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.KRONSHTEIN, 1)
-    #
-    # def skobi_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SKOBI_53_8, 1)
-    #
-    # def skotch_isospan_kl_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSPAN_KL, 1)
-    #
-    # def skotch_isostong_lk_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.SKOTCH_IZOSTRONG_LK, 1)
-    #
-    # def dubel_calculate(self) -> float:
-    #     return round(self.sqr * MaterialsToSqrMetr.DUBEL_10x80, 1)
-    #
-    # def calculate(self):
-    #     data = {}
-    #     if self.is_floor:
-    #         self.izospan_am_calculate()
-    #         self.setka_arm_calculate()
-    #         self.reika_20_40_calculate()
-    #         self.samorez_potainoi_calculate()
-    #         self.skobi_calculate()
-    #         self.skotch_isostong_lk_calculate()
-    #     if self.is_wall:
-    #         self.izospan_am_calculate()
-    #         self.setka_arm_calculate()
-    #         self.brus_50_50_calculate()
-    #         self.reika_20_40_calculate()
-    #         self.samorez_potainoi_calculate()
-    #         self.samorez_clop_calculate()
-    #         self.bolt_san_tech_calculate()
-    #         self.kronshtein_calculate()
-    #         self.skobi_calculate()
-    #         self.skotch_isospan_kl_calculate()
-    #         self.skotch_isostong_lk_calculate()
-    #         self.dubel_calculate()
-    #     if self.is_roof:
-    #         self.izospan_am_calculate()
-    #         self.setka_arm_calculate()
-    #         self.reika_20_40_calculate()
-    #         self.samorez_potainoi_calculate()
-    #         self.skobi_calculate()
-    #         self.skotch_isostong_lk_calculate()
-    #
-    #         return data
-
-    # {v2
-
     def get_material_count(self, material: MaterialsType):
         return round(self.sqr * material.rashod_na_metr, 1)
 
     def get_amount_price(self, material):
         return round(self.get_material_count(material) * material.price, 1)
 
-    def calculate_v2(self) -> dict:
+    def calculate(self) -> dict:
         needed_materials = []
         data = {}
         if self.is_floor:
