@@ -74,6 +74,20 @@ class MaterialsDopWorkCalculator:
                 MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
                 MaterialsType(MaterialsCodes.DUBEL_10x80),
             ]
+            if self.is_wood_house:
+                needed_materials = [
+                    MaterialsType(MaterialsCodes.IZOSPAN_AM),
+                    MaterialsType(MaterialsCodes.SETKA_ARM_25x25),
+                    MaterialsType(MaterialsCodes.BRUS_SS_50x50x3000),
+                    MaterialsType(MaterialsCodes.REIKA_SS_20x40x3000),
+                    MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_40x4),
+                    MaterialsType(MaterialsCodes.SAMOREZ_CLOP),
+                    MaterialsType(MaterialsCodes.BOLT_SAN_TECH_8x100),
+                    MaterialsType(MaterialsCodes.KRONSHTEIN),
+                    MaterialsType(MaterialsCodes.SKOBI_53_8),
+                    MaterialsType(MaterialsCodes.SKOTCH_IZOSPAN_KL),
+                    MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
+                ]
         if self.is_roof:
             needed_materials = [
                 MaterialsType(MaterialsCodes.IZOSPAN_AM),
@@ -194,15 +208,15 @@ class CommonCalculator:
         if self.sqr_floor:
             if self.is_floor_dop_work:
                 material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_floor, is_floor=True)
-                dop_work_material_count_floor_data = material_dop_work_calc.calculate_v2()
+                dop_work_material_count_floor_data = material_dop_work_calc.calculate()
         if self.sqr_wall:
             if self.is_wall_dop_work:
-                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wall=True)
-                dop_work_material_count_wall_data = material_dop_work_calc.calculate_v2()
+                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house, is_wall=True)
+                dop_work_material_count_wall_data = material_dop_work_calc.calculate()
         if self.sqr_roof:
             if self.is_roof_dop_work:
                 material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_roof, is_roof=True)
-                dop_work_material_count_roof_data = material_dop_work_calc.calculate_v2()
+                dop_work_material_count_roof_data = material_dop_work_calc.calculate()
 
         common_materials_count = combine_dicts(
             dop_work_material_count_floor_data,
