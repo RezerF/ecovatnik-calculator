@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone repo!!
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: ls curr dir
         run: ls -la ./
