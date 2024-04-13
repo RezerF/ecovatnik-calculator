@@ -35,9 +35,9 @@ class Common:
 
 
 class MaterialsToSqrMetr:
-    IZOSPAN_AM = 1.25
-    SETKA_ARM_25x25 = 1.25
-    BRUS_SS_50x50x3000 = 0.92
+    IZOSPAN_AM = 1.58
+    SETKA_ARM_25x25 = 1.58
+    BRUS_SS_50x50x3000 = 1.17
     REIKA_SS_20x40x3000 = 0.62
     SAMOREZ_POTAINOI_40x4 = 8.35
     SAMOREZ_CLOP = 5.6
