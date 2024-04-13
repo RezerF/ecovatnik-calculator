@@ -26,7 +26,7 @@ class WorksPrices:
 class Plotnost:
     HORISONTAL = 35
     VERTICAL = 65
-    INCLINED = 55
+    INCLINED = 55  # наклонка
 
 
 class Common:

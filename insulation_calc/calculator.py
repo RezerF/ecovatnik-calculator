@@ -171,6 +171,7 @@ class CommonCalculator:
             is_floor_dop_work,
             is_wall_dop_work,
             is_roof_dop_work,
+            is_spine,
     ):
         self.sqr_floor = sqr_floor
         self.width_floor = width_floor
@@ -182,13 +183,16 @@ class CommonCalculator:
         self.is_floor_dop_work = is_floor_dop_work
         self.is_wall_dop_work = is_wall_dop_work
         self.is_roof_dop_work = is_roof_dop_work
+        self.is_spine = is_spine
 
     def calculate_ecovata_common_ves(self):
         ecovata_ves_floor = 0
         ecovata_ves_wall = 0
         ecovata_ves_roof = 0
         if self.sqr_floor:
-            ins_calc = EcovataCalculator(self.sqr_floor, self.width_floor, Plotnost.HORISONTAL)
+            plotnost = Plotnost.INCLINED if self.is_spine else Plotnost.HORISONTAL
+            print(plotnost)
+            ins_calc = EcovataCalculator(self.sqr_floor, self.width_floor, plotnost)
             ecovata_ves_floor = ins_calc.ves_calculate
         if self.sqr_wall:
             ins_calc = EcovataCalculator(self.sqr_wall, self.width_wall, Plotnost.VERTICAL)
