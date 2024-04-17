@@ -1,9 +1,8 @@
 from typing import Union, List
 
-from insulation_calc.common.constants import Common, Plotnost, WorksPrices, MaterialsCodes, MaterialsToSqrMetr, \
-    WorkCodes
+from insulation_calc.common.constants import Common, Plotnost, MaterialsCodes, WorkCodes
 from insulation_calc.common.my_types import MaterialsType, WorksType
-from insulation_calc.common.table_row import TableRow
+from insulation_calc.common.parse_data import WorksPrices
 from insulation_calc.common.utils import combine_dicts
 
 
@@ -66,7 +65,7 @@ class MaterialsDopWorkCalculator:
                 MaterialsType(MaterialsCodes.BRUS_SS_50x50x3000),
                 MaterialsType(MaterialsCodes.REIKA_SS_20x40x3000),
                 MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_40x4),
-                MaterialsType(MaterialsCodes.SAMOREZ_CLOP),
+                MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_80x5),
                 MaterialsType(MaterialsCodes.BOLT_SAN_TECH_8x100),
                 MaterialsType(MaterialsCodes.KRONSHTEIN),
                 MaterialsType(MaterialsCodes.SKOBI_53_8),
@@ -81,7 +80,7 @@ class MaterialsDopWorkCalculator:
                     MaterialsType(MaterialsCodes.BRUS_SS_50x50x3000),
                     MaterialsType(MaterialsCodes.REIKA_SS_20x40x3000),
                     MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_40x4),
-                    MaterialsType(MaterialsCodes.SAMOREZ_CLOP),
+                    MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_80x5),
                     MaterialsType(MaterialsCodes.BOLT_SAN_TECH_8x100),
                     MaterialsType(MaterialsCodes.KRONSHTEIN),
                     MaterialsType(MaterialsCodes.SKOBI_53_8),

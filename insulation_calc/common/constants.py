@@ -1,26 +1,5 @@
-class MaterialsPrices:
-    ECOVATA = 78  # Эковата упаковка 15 кг = 1170р
-    IZOSPAN_AM = 83
-    SETKA_ARM_25x25 = 82  # Сетка стеклотканевая фасадная
-    BRUS_SS_50x50x3000 = 311
-    REIKA_SS_20x40x3000 = 118
-    SAMOREZ_POTAINOI_40x4 = 3.68  # Саморезы по дереву 40x4,0 мм потайная головка конструкционные (для контр обрешотки)
-    SAMOREZ_CLOP = 1.34  # Саморезы клопы 38 (41)x4,2 мм  (креление кранштейна к брусу 50*50)
-    BOLT_SAN_TECH_8x100 = 14  # Болт 8х100 мм DIN 571 оцинкованный  (крепление кранштейна к стене)
-    KRONSHTEIN = 66  # Кронштейн для вентилируемых фасадов регулируемый 200х50х50х2мм
-    SKOBI_53_8 = 62  # Скобы для степлера тип 53 8 мм (1000 шт.)
-    SKOTCH_IZOSPAN_KL = 57  # ИЗОСПАН KL+ усиленная двухсторонняя клейкая лента 25п.м
-    SKOTCH_IZOSTRONG_LK = 25  # Лента соединительная Изостронг LK 15 мм х 22,5п.м
-    DUBEL_10x80 = 9  # Дюбель распорный Hard-Fix 10x80 мм нейлон (для монтажа кронштейа к бетонной или кирпичной стене)
 
-
-class WorksPrices:
-    ECOVATA_MONTAJ = 25
-    OBRESHETKI_MONTAJ_PO_DEREVU = 400  # Монтаж деревянной обрешетки по дереву
-    OBRESHETKI_MONTAJ_PO_KIRPICHU = 520  # Монтаж деревянной обрешетки по дереву
-    GIDRO_PAROISOL_MONTAJ = 150  # Монтаж ветро-влагозащитной мембраны
-    SETKA_ARMIRUU_MONTAJ = 150  # Монтаж армирующей сетки
-    KONTR_OBRESHETKA_MONTAJ = 150  # Монтаж контробрешетки
+from insulation_calc.common.parse_data import UnitMeasurement
 
 
 class Plotnost:
@@ -34,56 +13,6 @@ class Common:
     VES_UPAKOVKI = 15
 
 
-class MaterialsToSqrMetr:
-    IZOSPAN_AM = 1.58
-    SETKA_ARM_25x25 = 1.58
-    BRUS_SS_50x50x3000 = 1.17
-    REIKA_SS_20x40x3000 = 0.62
-    SAMOREZ_POTAINOI_40x4 = 8.35
-    SAMOREZ_CLOP = 5.6
-    BOLT_SAN_TECH_8x100 = 1.84
-    KRONSHTEIN = 1.84
-    SKOBI_53_8 = 0.06
-    SKOTCH_IZOSPAN_KL = 1.17
-    SKOTCH_IZOSTRONG_LK = 1.17
-    DUBEL_10x80 = 1.84
-
-
-class NamingMapping:
-    # МАТЕРИАЛЫ
-    ECOVATA = 'Утеплитель целлюлозный (Эковата)'
-    IZOSPAN_AM = 'Ветро-влагозащитная мембрана Изоспан АМ'
-    SETKA_ARM_25x25 = 'Сетка стеклотканевая фасадная'
-    BRUS_SS_50x50x3000 = 'Брус строганный 50*50*3000'
-    REIKA_SS_20x40x3000 = 'Рейка строганная 20*40*3000'
-    SAMOREZ_POTAINOI_40x4 = 'Саморезы по дереву 40x4,0 мм потайная головка конструкционные'
-    SAMOREZ_CLOP = 'Саморезы клопы 38 (41)x4,2 мм'
-    BOLT_SAN_TECH_8x100 = 'Болт 8х100 мм DIN 571 оцинкованный'
-    KRONSHTEIN = 'Кронштейн для вентилируемых фасадов регулируемый 200х50х50х2мм'
-    SKOBI_53_8 = 'Скобы для степлера тип 53 10 мм (1000 шт.)'
-    SKOTCH_IZOSPAN_KL = 'ИЗОСПАН KL+ усиленная двухсторонняя клейкая лента'
-    SKOTCH_IZOSTRONG_LK = 'Лента соединительная Изостронг LK 15 мм'
-    DUBEL_10x80 = 'Дюбель распорный Hard-Fix 10x80 мм нейлон'
-
-    # РАБОТЫ
-    OBRESHETKI_MONTAJ_PO_KIRPICHU = 'Монтаж деревянной обрешетки по кирпичу или бетону'
-    OBRESHETKI_MONTAJ_PO_DEREVU = 'Монтаж деревянной обрешетки по дереву'
-    GIDRO_PAROISOL_MONTAJ = 'Монтаж пароизоляционной пленки/влагозащитной мембраны'
-    SETKA_ARMIRUU_MONTAJ = 'Монтаж армирующей сетки'
-    KONTR_OBRESHETKA_MONTAJ = 'Монтаж контробрешетки'
-    ECOVATA_MONTAJ = 'Можтаж утеплителя целлюлозного'
-
-
-class UnitMeasurement:
-    M2 = "м2"
-    M3 = "куб.м."
-    KG = "кг."
-    PIECES = "шт."
-    PM = "п.м."
-    PACKAGE = "упаковок"
-    RUB = "руб."
-
-
 class UnitMeasureMapping:
     # МАТЕРИАЛЫ
     ECOVATA = UnitMeasurement.KG
@@ -92,7 +21,7 @@ class UnitMeasureMapping:
     BRUS_SS_50x50x3000 = UnitMeasurement.PIECES
     REIKA_SS_20x40x3000 = UnitMeasurement.PIECES
     SAMOREZ_POTAINOI_40x4 = UnitMeasurement.PIECES
-    SAMOREZ_CLOP = UnitMeasurement.PIECES
+    SAMOREZ_POTAINOI_80x5 = UnitMeasurement.PIECES
     BOLT_SAN_TECH_8x100 = UnitMeasurement.PIECES
     KRONSHTEIN = UnitMeasurement.PIECES
     SKOBI_53_8 = UnitMeasurement.PACKAGE
@@ -116,7 +45,7 @@ class MaterialsCodes:
     BRUS_SS_50x50x3000 = 'BRUS_SS_50x50x3000'
     REIKA_SS_20x40x3000 = 'REIKA_SS_20x40x3000'
     SAMOREZ_POTAINOI_40x4 = 'SAMOREZ_POTAINOI_40x4'
-    SAMOREZ_CLOP = 'SAMOREZ_CLOP'
+    SAMOREZ_POTAINOI_80x5 = 'SAMOREZ_POTAINOI_80x5'
     BOLT_SAN_TECH_8x100 = 'BOLT_SAN_TECH_8x100'
     KRONSHTEIN = 'KRONSHTEIN'
     SKOBI_53_8 = 'SKOBI_53_8'

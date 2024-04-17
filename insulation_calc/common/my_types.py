@@ -1,7 +1,7 @@
 from attrs import define, field
 
-from insulation_calc.common.constants import NamingMapping, UnitMeasureMapping, MaterialsToSqrMetr, MaterialsPrices, \
-    WorksPrices
+from insulation_calc.common.constants import UnitMeasureMapping
+from insulation_calc.common.parse_data import NamingMapping, MaterialsPrices, MaterialsToSqrMetr, WorksPrices
 
 
 @define
