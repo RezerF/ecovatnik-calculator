@@ -169,6 +169,7 @@ class CommonCalculator:
             is_wall_dop_work,
             is_roof_dop_work,
             is_spine,
+            ratio,
     ):
         self.sqr_floor = sqr_floor
         self.width_floor = width_floor
@@ -181,6 +182,7 @@ class CommonCalculator:
         self.is_wall_dop_work = is_wall_dop_work
         self.is_roof_dop_work = is_roof_dop_work
         self.is_spine = is_spine
+        self.ratio = ratio
 
     def calculate_ecovata_common_ves(self):
         ecovata_ves_floor = 0
@@ -280,7 +282,7 @@ class CommonCalculator:
                 "name": obj.naming,
                 "count": value,
                 "unit_measurement": obj.unit_measure,
-                "unit_price": obj.price,
+                "unit_price": obj.price * self.ratio,
                 "amount_price": obj.amount_price(value)}
 
         # add ecovata to result dict

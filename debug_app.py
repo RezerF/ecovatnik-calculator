@@ -12,6 +12,8 @@ st.write("""
 """)
 
 def user_input_features():
+    st.sidebar.header("=======Коэффициент сложности====")
+    st.sidebar.slider("Коэф", min_value=1.0, max_value=4.0, step=0.25, key='ratio')
     st.sidebar.header("=============Перекрытие=============")
     sq = st.sidebar.number_input("Площадь перекрытия, м2", key='sqr_floor')
     wi = st.sidebar.number_input('Толщина перекрытия, мм', key='width_floor')
@@ -66,6 +68,7 @@ common_calc = CommonCalculator(
     is_wall_dop_work=is_dop_work(st.session_state.is_wall_dop_work),
     is_roof_dop_work=is_dop_work(st.session_state.is_roof_dop_work),
     is_spine=to_bool_spine(st.session_state.is_spine),
+    ratio=st.session_state.ratio
 )
 materials_data = common_calc.calculate_dop_work_materials()
 data_table = [TableRow(**v).get_row() for _, v in materials_data.items()]
@@ -78,10 +81,11 @@ total_materials = sum(amount_prices)
 st.markdown(f"#### Итого материалы:  ___ {total_materials}___ руб.   ")
 st.markdown("    ")
 
+st.subheader('Работы:')
+
 works_data = common_calc.calculate_dop_work_costs()
 data_table = [TableRow(**v).get_row() for _, v in works_data.items()]
 
-st.subheader('Работы:')
 st.dataframe(data_table, width=1000, use_container_width=True)
 
 amount_prices = [v["amount_price"] for _, v in works_data.items()]
