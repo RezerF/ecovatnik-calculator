@@ -20,7 +20,6 @@ class MaterialsPrices:
     KRONSHTEIN = material_prices.KRONSHTEIN
     SKOBI_53_8 = material_prices.SKOBI_53_8
     SKOTCH_IZOSPAN_KL = material_prices.SKOTCH_IZOSPAN_KL
-    SKOTCH_IZOSTRONG_LK = material_prices.SKOTCH_IZOSTRONG_LK
     DUBEL_10x80 = material_prices.DUBEL_10x80
 
 
@@ -44,7 +43,6 @@ class MaterialsToSqrMetr:
     KRONSHTEIN = materlials_to_sqr_meter.KRONSHTEIN
     SKOBI_53_8 = materlials_to_sqr_meter.SKOBI_53_8
     SKOTCH_IZOSPAN_KL = materlials_to_sqr_meter.SKOTCH_IZOSPAN_KL
-    SKOTCH_IZOSTRONG_LK = materlials_to_sqr_meter.SKOTCH_IZOSTRONG_LK
     DUBEL_10x80 = materlials_to_sqr_meter.DUBEL_10x80
 
 
@@ -61,7 +59,6 @@ class NamingMapping:
     KRONSHTEIN = naming_mapping.KRONSHTEIN
     SKOBI_53_8 = naming_mapping.SKOBI_53_8
     SKOTCH_IZOSPAN_KL = naming_mapping.SKOTCH_IZOSPAN_KL
-    SKOTCH_IZOSTRONG_LK = naming_mapping.SKOTCH_IZOSTRONG_LK
     DUBEL_10x80 = naming_mapping.DUBEL_10x80
 
     # РАБОТЫ

@@ -26,7 +26,6 @@ class UnitMeasureMapping:
     KRONSHTEIN = UnitMeasurement.PIECES
     SKOBI_53_8 = UnitMeasurement.PACKAGE
     SKOTCH_IZOSPAN_KL = UnitMeasurement.PM
-    SKOTCH_IZOSTRONG_LK = UnitMeasurement.PM
     DUBEL_10x80 = UnitMeasurement.PIECES
 
     # РАБОТЫ
@@ -50,7 +49,6 @@ class MaterialsCodes:
     KRONSHTEIN = 'KRONSHTEIN'
     SKOBI_53_8 = 'SKOBI_53_8'
     SKOTCH_IZOSPAN_KL = 'SKOTCH_IZOSPAN_KL'
-    SKOTCH_IZOSTRONG_LK = 'SKOTCH_IZOSTRONG_LK'
     DUBEL_10x80 = 'DUBEL_10x80'
 
 

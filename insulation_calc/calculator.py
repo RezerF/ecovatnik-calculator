@@ -55,7 +55,7 @@ class MaterialsDopWorkCalculator:
                 MaterialsType(MaterialsCodes.REIKA_SS_20x40x3000),
                 MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_40x4),
                 MaterialsType(MaterialsCodes.SKOBI_53_8),
-                MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
+                MaterialsType(MaterialsCodes.SKOTCH_IZOSPAN_KL),
             ]
 
         if self.is_wall:
@@ -70,7 +70,6 @@ class MaterialsDopWorkCalculator:
                 MaterialsType(MaterialsCodes.KRONSHTEIN),
                 MaterialsType(MaterialsCodes.SKOBI_53_8),
                 MaterialsType(MaterialsCodes.SKOTCH_IZOSPAN_KL),
-                MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
                 MaterialsType(MaterialsCodes.DUBEL_10x80),
             ]
             if self.is_wood_house:
@@ -85,7 +84,6 @@ class MaterialsDopWorkCalculator:
                     MaterialsType(MaterialsCodes.KRONSHTEIN),
                     MaterialsType(MaterialsCodes.SKOBI_53_8),
                     MaterialsType(MaterialsCodes.SKOTCH_IZOSPAN_KL),
-                    MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
                 ]
         if self.is_roof:
             needed_materials = [
@@ -94,7 +92,7 @@ class MaterialsDopWorkCalculator:
                 MaterialsType(MaterialsCodes.REIKA_SS_20x40x3000),
                 MaterialsType(MaterialsCodes.SAMOREZ_POTAINOI_40x4),
                 MaterialsType(MaterialsCodes.SKOBI_53_8),
-                MaterialsType(MaterialsCodes.SKOTCH_IZOSTRONG_LK),
+                MaterialsType(MaterialsCodes.SKOTCH_IZOSPAN_KL),
             ]
         for material in needed_materials:
             data.update({material.code: self.get_material_count(material)})
