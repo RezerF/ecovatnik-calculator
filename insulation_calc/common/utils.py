@@ -1,8 +1,8 @@
 import urllib3
 import yaml
 
-URL_CFG_DATA = "https://drive.google.com/uc?export=download&id=1f3P8czIFI3k3mLrhLjGlXhWsMXOnttyy"  # data_old.yml
-# URL_CFG_DATA = "https://drive.google.com/uc?export=download&id=16RYtNiwpCEe2knOZRVJdz5XhcCbN8hdh" # data_old.yml
+# URL_CFG_DATA = "https://drive.google.com/uc?export=download&id=1f3P8czIFI3k3mLrhLjGlXhWsMXOnttyy"  # data.yml
+URL_CFG_DATA = "https://drive.google.com/uc?export=download&id=16RYtNiwpCEe2knOZRVJdz5XhcCbN8hdh"  # data_old.yml
 
 
 class Struct:

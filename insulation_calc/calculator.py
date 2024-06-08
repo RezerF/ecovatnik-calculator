@@ -104,28 +104,17 @@ class MaterialsDopWorkCalculator:
 
 
 class DopWorkWorkCalculator:
-    def __init__(self, sqr, is_wood_house=True, is_floor=False, is_wall=False, is_roof=False):
+    def __init__(self, sqr, count_went_kanal, is_wood_house=True, is_floor=False, is_wall=False, is_roof=False, ):
         self.sqr = sqr  # метры
         self.is_wood_house = is_wood_house
         self.is_floor = is_floor
         self.is_wall = is_wall
         self.is_roof = is_roof
+        self.count_went_kanal = count_went_kanal
 
-    def obreshetki_montaj_calculate(self) -> float:
-        if not self.is_wood_house and self.is_wall:
-            return round(self.sqr * WorksPrices.OBRESHETKI_MONTAJ_PO_KIRPICHU, 1)
-        return round(self.sqr * WorksPrices.OBRESHETKI_MONTAJ_PO_DEREVU, 1)
-
-    def gidro_paroisol_montaj_calculate(self) -> float:
-        return round(self.sqr * WorksPrices.GIDRO_PAROISOL_MONTAJ, 1)
-
-    def setka_arm_montaj_calculate(self) -> float:
-        return round(self.sqr * WorksPrices.SETKA_ARMIRUU_MONTAJ, 1)
-
-    def kontr_obreshetka_montaj_calculate(self) -> float:
-        return round(self.sqr * WorksPrices.KONTR_OBRESHETKA_MONTAJ, 1)
-
-    def get_works_count(self):
+    def get_works_count(self, work):
+        if work.code == WorkCodes.VINOS_WENT_PRODUHOV:
+            return self.count_went_kanal
         return self.sqr
 
     def calculate(self):
@@ -133,11 +122,14 @@ class DopWorkWorkCalculator:
         data = {}
         if self.is_wall:
             needed_works = [
-                WorksType(WorkCodes.OBRESHETKI_MONTAJ_PO_DEREVU if self.is_wood_house else WorkCodes.OBRESHETKI_MONTAJ_PO_KIRPICHU),
+                WorksType(
+                    WorkCodes.OBRESHETKI_MONTAJ_PO_DEREVU if self.is_wood_house else WorkCodes.OBRESHETKI_MONTAJ_PO_KIRPICHU),
                 WorksType(WorkCodes.GIDRO_PAROISOL_MONTAJ),
                 WorksType(WorkCodes.SETKA_ARMIRUU_MONTAJ),
                 WorksType(WorkCodes.KONTR_OBRESHETKA_MONTAJ),
             ]
+            if self.count_went_kanal:
+                needed_works.append(WorksType(WorkCodes.VINOS_WENT_PRODUHOV))
         elif self.is_floor:
             needed_works = [
                 WorksType(WorkCodes.GIDRO_PAROISOL_MONTAJ),
@@ -150,9 +142,13 @@ class DopWorkWorkCalculator:
                 WorksType(WorkCodes.SETKA_ARMIRUU_MONTAJ),
                 WorksType(WorkCodes.KONTR_OBRESHETKA_MONTAJ),
             ]
+        # elif self.count_went_kanal:
+        #     needed_works = [
+        #         WorksType(WorkCodes.VINOS_WENT_PRODUHOV),
+        #     ]
 
         for work in needed_works:
-            data.update({work.code: self.get_works_count()})
+            data.update({work.code: self.get_works_count(work)})
 
         return data
 
@@ -164,6 +160,10 @@ class CommonCalculator:
             width_floor,
             sqr_wall,
             width_wall,
+            high_three_wall,
+            high_six_wall,
+            count_window,
+            count_went_kanal,
             sqr_roof,
             width_roof,
             is_wood_house,
@@ -176,6 +176,10 @@ class CommonCalculator:
         self.width_floor = width_floor
         self.sqr_wall = sqr_wall
         self.width_wall = width_wall
+        self.high_three_wall = high_three_wall,
+        self.high_six_wall = high_six_wall,
+        self.count_window = count_window,
+        self.count_went_kanal = count_went_kanal,
         self.sqr_roof = sqr_roof
         self.width_roof = width_roof
         self.is_wood_house = is_wood_house  # дом деревянный?
@@ -214,7 +218,8 @@ class CommonCalculator:
                 dop_work_material_count_floor_data = material_dop_work_calc.calculate()
         if self.sqr_wall:
             if self.is_wall_dop_work:
-                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house, is_wall=True)
+                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house,
+                                                                    is_wall=True)
                 dop_work_material_count_wall_data = material_dop_work_calc.calculate()
         if self.sqr_roof:
             if self.is_roof_dop_work:
@@ -256,14 +261,18 @@ class CommonCalculator:
         dop_work_cost_floor_data = {}
         dop_work_cost_wall_data = {}
         dop_work_cost_roof_data = {}
+        common_went_kanal_cost = {}
         if self.sqr_floor:
             if self.is_floor_dop_work:
                 dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_floor, is_floor=True)
                 dop_work_cost_floor_data = dop_work_calc.calculate()
         if self.sqr_wall:
             if self.is_wall_dop_work:
-                dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house, is_wall=True)
+                dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_wall, count_went_kanal=self.count_went_kanal,
+                                                      is_wood_house=self.is_wood_house, is_wall=True)
                 dop_work_cost_wall_data = dop_work_calc.calculate()
+        # if self.count_went_kanal:
+        #     common_went_kanal_cost = DopWorkWorkCalculator(count_went_kanal=self.count_went_kanal).calculate()
         if self.sqr_roof:
             if self.is_roof_dop_work:
                 dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_roof, is_roof=True)
@@ -272,7 +281,8 @@ class CommonCalculator:
         common_dop_woks_costs = combine_dicts(
             dop_work_cost_floor_data,
             dop_work_cost_wall_data,
-            dop_work_cost_roof_data
+            dop_work_cost_roof_data,
+            common_went_kanal_cost
         )
 
         result_data = {}
