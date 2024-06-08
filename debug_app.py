@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-from insulation_calc.calculator import CommonCalculator
+from insulation_calc.calculator import CommonCalculator, EcovataCalculator
+from insulation_calc.common.constants import Plotnost
 from insulation_calc.common.table_row import TableRow
 
 st.write("""
@@ -73,10 +74,8 @@ st.subheader('Материалы:')
 st.dataframe(data_table, width=1000,)
 
 amount_prices = [v["amount_price"] for _, v in materials_data.items()]
-total = sum(amount_prices)
-st.markdown(f"#### Итого материалы:  ___ {total}___ руб.   ")
-st.markdown("    ")
-st.markdown("    ")
+total_materials = sum(amount_prices)
+st.markdown(f"#### Итого материалы:  ___ {total_materials}___ руб.   ")
 st.markdown("    ")
 
 works_data = common_calc.calculate_dop_work_costs()
@@ -86,5 +85,36 @@ st.subheader('Работы:')
 st.dataframe(data_table, width=1000, use_container_width=True)
 
 amount_prices = [v["amount_price"] for _, v in works_data.items()]
-total = sum(amount_prices)
-st.markdown(f"#### Итого работы:  ___ {total}___ руб.")
+total_works = sum(amount_prices)
+st.markdown(f"#### Итого работы:  ___ {total_works}___ руб.")
+st.subheader('', divider='rainbow')
+st.markdown(f"#### Итого работы + материалы:  ___ {total_materials + total_works}___ руб.")
+
+### Объемы
+ecovata_calc_floor = EcovataCalculator(
+    sqr=st.session_state.sqr_floor,
+    width=st.session_state.width_floor,
+    plotnost=Plotnost.INCLINED if to_bool_spine(st.session_state.is_spine) else Plotnost.HORISONTAL)
+
+ecovata_calc_wall = EcovataCalculator(
+    sqr=st.session_state.sqr_wall,
+    width=st.session_state.width_wall,
+    plotnost=Plotnost.VERTICAL)
+
+ecovata_calc_roof = EcovataCalculator(
+    sqr=st.session_state.sqr_roof,
+    width=st.session_state.width_roof,
+    plotnost=Plotnost.VERTICAL)
+
+st.subheader('', divider='rainbow')
+st.subheader('')
+st.subheader('Объемы:')
+if to_bool_spine(st.session_state.is_spine):
+    vol_plontost_55 = ecovata_calc_floor.volume_calculate + ecovata_calc_roof.volume_calculate
+    vol_plontost_35 = 0
+else:
+    vol_plontost_55 = ecovata_calc_roof.volume_calculate
+    vol_plontost_35 = ecovata_calc_floor.volume_calculate
+st.markdown(f'35кг/м3: ___ {vol_plontost_35}___куб.м.')
+st.markdown(f'55кг/м3: ___ {vol_plontost_55}___куб.м.')
+st.markdown(f'65кг/м3: ___ {ecovata_calc_wall.volume_calculate}___куб.м.')

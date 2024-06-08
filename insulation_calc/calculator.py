@@ -10,7 +10,7 @@ class EcovataCalculator:
     def __init__(self, sqr, width, plotnost):
         self.sqr = sqr  # метры
         self.width = width  # миллиметры
-        self.plotnost = plotnost  # миллиметры
+        self.plotnost = plotnost  # КГ/М3
 
     @property
     def volume_calculate(self) -> float:
