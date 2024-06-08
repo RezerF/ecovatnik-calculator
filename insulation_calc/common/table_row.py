@@ -3,10 +3,10 @@
 class TableRow:
     def __init__(self, name, count, unit_measurement, unit_price, amount_price):
         self.name = str(name)
-        self.count = str(count)
+        self.count = str(count).replace('.', ',')
         self.unit_measurement = str(unit_measurement)
-        self.unit_price = str(unit_price)
-        self.total_amount = str(amount_price)
+        self.unit_price = str(unit_price).replace('.', ',')
+        self.total_amount = str(amount_price).replace('.', ',')
 
     def get_row(self):
         return {"Наименование": self.name, "Кол-во (ед.)": self.count, "Ед. изм.": self.unit_measurement,
