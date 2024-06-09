@@ -102,12 +102,18 @@ class MaterialsDopWorkCalculator:
 
 
 class DopWorkWorkCalculator:
-    def __init__(self, sqr, is_wood_house=True, is_floor=False, is_wall=False, is_roof=False):
+    def __init__(
+            self, sqr, is_wood_house=True, is_floor=False, is_wall=False,
+            is_roof=False, is_demontaj=False, is_build_lesa=False, is_destroy_beton=False
+    ):
         self.sqr = sqr  # метры
         self.is_wood_house = is_wood_house
         self.is_floor = is_floor
         self.is_wall = is_wall
         self.is_roof = is_roof
+        self.is_demontaj = is_demontaj
+        self.is_build_lesa = is_build_lesa
+        self.is_destroy_beton = is_destroy_beton
 
     def obreshetki_montaj_calculate(self) -> float:
         if not self.is_wood_house and self.is_wall:
@@ -131,7 +137,8 @@ class DopWorkWorkCalculator:
         data = {}
         if self.is_wall:
             needed_works = [
-                WorksType(WorkCodes.OBRESHETKI_MONTAJ_PO_DEREVU if self.is_wood_house else WorkCodes.OBRESHETKI_MONTAJ_PO_KIRPICHU),
+                WorksType(
+                    WorkCodes.OBRESHETKI_MONTAJ_PO_DEREVU if self.is_wood_house else WorkCodes.OBRESHETKI_MONTAJ_PO_KIRPICHU),
                 WorksType(WorkCodes.GIDRO_PAROISOL_MONTAJ),
                 WorksType(WorkCodes.SETKA_ARMIRUU_MONTAJ),
                 WorksType(WorkCodes.KONTR_OBRESHETKA_MONTAJ),
@@ -147,6 +154,18 @@ class DopWorkWorkCalculator:
                 WorksType(WorkCodes.GIDRO_PAROISOL_MONTAJ),
                 WorksType(WorkCodes.SETKA_ARMIRUU_MONTAJ),
                 WorksType(WorkCodes.KONTR_OBRESHETKA_MONTAJ),
+            ]
+        elif self.is_demontaj:
+            needed_works = [
+                WorksType(WorkCodes.DEMONTAJ),
+            ]
+        elif self.is_build_lesa:
+            needed_works = [
+                WorksType(WorkCodes.BUILD_LESA),
+            ]
+        elif self.is_destroy_beton:
+            needed_works = [
+                WorksType(WorkCodes.DESTROY_BETON),
             ]
 
         for work in needed_works:
@@ -170,6 +189,9 @@ class CommonCalculator:
             is_roof_dop_work,
             is_spine,
             ratio,
+            demontaj,
+            build_lesa,
+            destroy_beton,
     ):
         self.sqr_floor = sqr_floor
         self.width_floor = width_floor
@@ -183,6 +205,9 @@ class CommonCalculator:
         self.is_roof_dop_work = is_roof_dop_work
         self.is_spine = is_spine
         self.ratio = ratio
+        self.demontaj = demontaj
+        self.build_lesa = build_lesa
+        self.destroy_beton = destroy_beton
 
     def calculate_ecovata_common_ves(self):
         ecovata_ves_floor = 0
@@ -214,7 +239,8 @@ class CommonCalculator:
                 dop_work_material_count_floor_data = material_dop_work_calc.calculate()
         if self.sqr_wall:
             if self.is_wall_dop_work:
-                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house, is_wall=True)
+                material_dop_work_calc = MaterialsDopWorkCalculator(sqr=self.sqr_wall, is_wood_house=self.is_wood_house,
+                                                                    is_wall=True)
                 dop_work_material_count_wall_data = material_dop_work_calc.calculate()
         if self.sqr_roof:
             if self.is_roof_dop_work:
@@ -256,6 +282,9 @@ class CommonCalculator:
         dop_work_cost_floor_data = {}
         dop_work_cost_wall_data = {}
         dop_work_cost_roof_data = {}
+        dop_work_cost_demontaj_data = {}
+        dop_work_cost_build_lesa_data = {}
+        dop_work_cost_destroy_beton_data = {}
         if self.sqr_floor:
             if self.is_floor_dop_work:
                 dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_floor, is_floor=True)
@@ -268,11 +297,23 @@ class CommonCalculator:
             if self.is_roof_dop_work:
                 dop_work_calc = DopWorkWorkCalculator(sqr=self.sqr_roof, is_roof=True)
                 dop_work_cost_roof_data = dop_work_calc.calculate()
+        if self.demontaj:
+            dop_work_calc = DopWorkWorkCalculator(sqr=self.demontaj, is_demontaj=True)
+            dop_work_cost_demontaj_data = dop_work_calc.calculate()
+        if self.build_lesa:
+            dop_work_calc = DopWorkWorkCalculator(sqr=1, is_build_lesa=True)
+            dop_work_cost_build_lesa_data = dop_work_calc.calculate()
+        if self.destroy_beton:
+            dop_work_calc = DopWorkWorkCalculator(sqr=self.destroy_beton, is_destroy_beton=True)
+            dop_work_cost_destroy_beton_data = dop_work_calc.calculate()
 
         common_dop_woks_costs = combine_dicts(
             dop_work_cost_floor_data,
             dop_work_cost_wall_data,
-            dop_work_cost_roof_data
+            dop_work_cost_roof_data,
+            dop_work_cost_demontaj_data,
+            dop_work_cost_build_lesa_data,
+            dop_work_cost_destroy_beton_data,
         )
 
         result_data = {}
@@ -283,7 +324,7 @@ class CommonCalculator:
                 "count": value,
                 "unit_measurement": obj.unit_measure,
                 "unit_price": obj.price * self.ratio,
-                "amount_price": obj.amount_price(value)}
+                "amount_price": obj.amount_price(value) * self.ratio}
 
         # add ecovata to result dict
         common_ves_ecovata = self.calculate_ecovata_common_ves()

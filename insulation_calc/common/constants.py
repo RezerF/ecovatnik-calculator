@@ -35,6 +35,9 @@ class UnitMeasureMapping:
     SETKA_ARMIRUU_MONTAJ = UnitMeasurement.M2
     KONTR_OBRESHETKA_MONTAJ = UnitMeasurement.M2
     ECOVATA_MONTAJ = UnitMeasurement.KG
+    DEMONTAJ = UnitMeasurement.M2
+    BUILD_LESA = UnitMeasurement.M2
+    DESTROY_BETON = UnitMeasurement.PIECES
 
 
 class MaterialsCodes:
@@ -59,3 +62,6 @@ class WorkCodes:
     GIDRO_PAROISOL_MONTAJ = 'GIDRO_PAROISOL_MONTAJ'
     SETKA_ARMIRUU_MONTAJ = 'SETKA_ARMIRUU_MONTAJ'
     KONTR_OBRESHETKA_MONTAJ = 'KONTR_OBRESHETKA_MONTAJ'
+    DEMONTAJ = 'DEMONTAJ'
+    BUILD_LESA = 'BUILD_LESA'
+    DESTROY_BETON = 'DESTROY_BETON'

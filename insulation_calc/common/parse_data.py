@@ -30,6 +30,9 @@ class WorksPrices:
     GIDRO_PAROISOL_MONTAJ = works_prices.GIDRO_PAROISOL_MONTAJ
     SETKA_ARMIRUU_MONTAJ = works_prices.SETKA_ARMIRUU_MONTAJ
     KONTR_OBRESHETKA_MONTAJ = works_prices.KONTR_OBRESHETKA_MONTAJ
+    DEMONTAJ = works_prices.DEMONTAJ
+    BUILD_LESA = works_prices.BUILD_LESA
+    DESTROY_BETON = works_prices.DESTROY_BETON
 
 
 class MaterialsToSqrMetr:
@@ -68,6 +71,9 @@ class NamingMapping:
     SETKA_ARMIRUU_MONTAJ = naming_mapping.SETKA_ARMIRUU_MONTAJ
     KONTR_OBRESHETKA_MONTAJ = naming_mapping.KONTR_OBRESHETKA_MONTAJ
     ECOVATA_MONTAJ = naming_mapping.ECOVATA_MONTAJ
+    DEMONTAJ = naming_mapping.DEMONTAJ
+    BUILD_LESA = naming_mapping.BUILD_LESA
+    DESTROY_BETON = naming_mapping.DESTROY_BETON
 
 
 class UnitMeasurement:
@@ -78,3 +84,4 @@ class UnitMeasurement:
     PM = unit_measurement.PM
     PACKAGE = unit_measurement.PACKAGE
     RUB = unit_measurement.RUB
+    USLUGA = unit_measurement.USLUGA
